@@ -55,8 +55,12 @@ app.listen(4002, async () => {
   console.log('Listening on port 4002')
 
   const res = await axios.get(`http://event-bus-srv:4005/events`)
-  res.data.forEach((event) => {
-    console.log(event)
-    handleEvent(event.type, event.data)
-  })
+  res.data
+    .forEach((event) => {
+      console.log(event)
+      handleEvent(event.type, event.data)
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
 })
